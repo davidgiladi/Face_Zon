@@ -172,7 +172,7 @@ public class demo extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Void aVoid) {
 
-                                            UpLoadImageFirebase(uri_image_view_1,manger_id ,fAut.getCurrentUser().getUid());
+                                            UpLoadImageFirebase(uri_image_view_1,manger_id ,fAut.getCurrentUser().getUid()); // upload the image to firebase
                                             fAut.signOut();
                                             while (fAut.getCurrentUser() != null) {
 
@@ -247,7 +247,7 @@ public class demo extends AppCompatActivity {
     Additionally, gets tow string  uid and mid that determine the location where the image will be updated.
 
  */
-    private void UpLoadImageFirebase(Uri imageUri, String uid, String mid) {
+    private void UpLoadImageFirebase(Uri imageUri, String mid, String uid) {
 
 
             StorageReference ref = mStorageRef.child("manger/" + mid + "/" + "user/" + uid + "/" + "Main_picture" + ".jpg");
