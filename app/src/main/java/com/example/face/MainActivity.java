@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 
 public class MainActivity extends AppCompatActivity {
-    Button bt_logout ,bt_demo;
+    Button bt_logout ,bt_demo, bt_list;
     FirebaseAuth fAut;
     FirebaseStorage mStorageRef;
     TextView textView;
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 image_1.setImageBitmap(bitmap);
             }
         });*/
+        bt_list = findViewById(R.id.bt_list);
         bt_demo = findViewById(R.id.bt_demo);
         bt_logout = findViewById(R.id.bt_logout);
         fAut = FirebaseAuth.getInstance();
@@ -48,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 fAut.signOut();
                 startActivity(new Intent(getApplicationContext(), Login.class));
+
+            }
+        });
+        bt_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), List_Object.class));
 
             }
         });
