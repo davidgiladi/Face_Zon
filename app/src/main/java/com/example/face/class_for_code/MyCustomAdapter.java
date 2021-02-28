@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import com.example.face.List_Object;
 import com.example.face.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyCustomAdapter extends ArrayAdapter<Object_Information> {
@@ -28,7 +30,7 @@ public class MyCustomAdapter extends ArrayAdapter<Object_Information> {
         View row;
         ViewHolder viewHolder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             row = LayoutInflater.from(getContext()).inflate(R.layout.row, parent, false);
 
             viewHolder = new ViewHolder();
@@ -42,10 +44,10 @@ public class MyCustomAdapter extends ArrayAdapter<Object_Information> {
         }
 
         Object_Information item = getItem(position);
-
         viewHolder.tx_name.setText(item.get_name());
         viewHolder.tx_email.setText(item.get_email());
 
         return row;
     }
+
 }
