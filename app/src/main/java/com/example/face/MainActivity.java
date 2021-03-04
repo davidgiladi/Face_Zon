@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void add_object (View v){
-        startActivity(new Intent(getApplicationContext(), Add_Object.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity2.class));
 
     }
 }

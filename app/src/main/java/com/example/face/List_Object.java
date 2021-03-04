@@ -3,15 +3,14 @@ package com.example.face;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,11 +19,15 @@ import android.widget.Toast;
 import com.example.face.class_for_code.MyCustomAdapter;
 import com.example.face.class_for_code.Object_Information;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,8 @@ public class List_Object extends AppCompatActivity {
      EditText etSearch ;;
     FirebaseFirestore db;
     FirebaseAuth fAut;
+    StorageReference mStorageRef;
+
     ArrayList <Object_Information> Objects;
 
 
@@ -49,6 +54,8 @@ public class List_Object extends AppCompatActivity {
 
 
         db = FirebaseFirestore.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
 
         read_data(new Firestore_on_call() {
                     @Override
@@ -133,10 +140,12 @@ public class List_Object extends AppCompatActivity {
                             if (task.isSuccessful()) {
 
                                 for (DocumentSnapshot document : task.getResult()) {
-                                    String email = document.getString("email");
-                                    String name = document.getString("name");
-                                    String uid = document.getId();
-                                    Object_Information Object = new Object_Information(name, email,uid);
+                                     String email = document.getString("email");
+                                     String name = document.getString("name");
+                                     String url_image =  document.getString("url_image");
+                                     String uid = document.getId();
+                                     Object_Information Object = new Object_Information(name, email,uid,url_image);
+
                                     Objects.add(Object);
                                 }
                                 firestore_on_call.on_call(Objects);
@@ -167,8 +176,10 @@ public class List_Object extends AppCompatActivity {
                             for (DocumentSnapshot document : task.getResult()) {
                                 String email = document.getString("email");
                                 String name = document.getString("name");
+                                String url_image =  document.getString("url_image");
                                 String uid = document.getId();
-                                Object_Information Object = new  Object_Information (name,email, uid);
+
+                                Object_Information Object = new  Object_Information (name,email, uid,url_image);
                                 Objects.add(Object);
                             }
                             firestore_on_call.on_call(Objects);
@@ -185,6 +196,8 @@ public class List_Object extends AppCompatActivity {
     private interface  Firestore_on_call {
         void on_call(List <Object_Information> list);
     }
+
+
 
 
 

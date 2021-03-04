@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -45,7 +47,7 @@ public class demo extends AppCompatActivity {
     EditText user_password;
     FirebaseAuth fAut;
     FirebaseFirestore db;
-    StorageReference mStorageRef ;
+    StorageReference mStorageRef;
     String name, email, password, manger_id, email_manger, password_manger;
     ImageView image_view_1;// main image of the user
     Uri uri_image_view_1;//uri of that image
@@ -71,8 +73,8 @@ public class demo extends AppCompatActivity {
 
 
         image_view_1 = findViewById(R.id.image_view_1);
-        progressBar = findViewById(R.id.progressBar);
 
+        progressBar = findViewById(R.id.progressBar);
         image_view_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,62 +160,18 @@ public class demo extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    Map<String, Object> data = new HashMap<>();
-                                    data.put("name", name);
-                                    data.put("email", email);
-                                    data.put("password", password);
-                                    FirebaseUser new_user = fAut.getCurrentUser();
-                                    String user_id = new_user.getUid();
-
-                                    db.collection("manger_id").document(manger_id)
-                                            .collection("pupil").document(user_id)
-                                            .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-
-                                            UpLoadImageFirebase(uri_image_view_1,manger_id ,fAut.getCurrentUser().getUid()); // upload the image to firebase
-                                            fAut.signOut();
-                                            while (fAut.getCurrentUser() != null) {
-
-                                            }
-                                            fAut.signInWithEmailAndPassword(email_manger, password_manger).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                                    if (task.isSuccessful()) {
-                                                        progressBar.setVisibility(View.INVISIBLE);
-                                                        Toast.makeText(demo.this, "The user added successfully  ", Toast.LENGTH_LONG).show();
-                                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
-                                                    } else {
-                                                        progressBar.setVisibility(View.INVISIBLE);
-                                                        Toast.makeText(demo.this, "Error ", Toast.LENGTH_LONG).show();
-                                                        startActivity(new Intent(getApplicationContext(), Login.class));
-                                                    }
-
-                                                }
-                                            });
-
+                               if (task.isSuccessful()) {
+                                   UpLoad_To_Firebase(uri_image_view_1, manger_id, fAut.getCurrentUser().getUid()); // upload  to firebase
                                         }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            progressBar.setVisibility(View.INVISIBLE);
-                                            Toast.makeText(demo.this, "Error ", Toast.LENGTH_LONG).show();
-                                            startActivity(new Intent(getApplicationContext(), Login.class));
-                                        }
-                                    });
 
+                                    }
 
-                                }
-
-                            }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(demo.this, "Error ", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), Login.class));
+                        return;
                     }
                 });
             }
@@ -241,32 +199,94 @@ public class demo extends AppCompatActivity {
     }
 
 
-
     /*
     Function gets the uri of tha user's picture.
     Additionally, gets tow string  uid and mid that determine the location where the image will be updated.
 
  */
-    private void UpLoadImageFirebase(Uri imageUri, String mid, String uid) {
+    private void UpLoad_To_Firebase(Uri imageUri, String mid, String uid) {
 
 
-            StorageReference ref = mStorageRef.child("manger/" + mid + "/" + "user/" + uid + "/" + "Main_picture" + ".jpg");
-            ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+        final StorageReference ref = mStorageRef.child("manger/" + mid + "/" + "user/" + uid + "/" + "Main_picture.jpg");
+        ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    Log.d("upload" , "The image was successfully uploaded to the server");
+                Log.d("upload", "The image was successfully uploaded to the server");
+                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String url_image = uri.toString();
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("name", name);
+                        data.put("email", email);
+                        data.put("password", password);
+                        data.put("url_image", url_image);
+                        FirebaseUser new_user = fAut.getCurrentUser();
+                        String user_id = new_user.getUid();
 
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(demo.this, "Error while attempt to upload the picture to the server", Toast.LENGTH_LONG).show();
+                        db.collection("manger_id").document(manger_id)
+                                .collection("pupil").document(user_id)
+                                .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
 
-                }
-            });
+                                fAut.signOut();
+                                while (fAut.getCurrentUser() != null) {
+                                }
+                                fAut.signInWithEmailAndPassword(email_manger, password_manger).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            progressBar.setVisibility(View.INVISIBLE);
+                                            Toast.makeText(demo.this, "The user added successfully  ", Toast.LENGTH_LONG).show();
+                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                                        } else {
+                                            progressBar.setVisibility(View.INVISIBLE);
+                                            Toast.makeText(demo.this, "Error ", Toast.LENGTH_LONG).show();
+                                            startActivity(new Intent(getApplicationContext(), Login.class));
+                                        }
+
+                                    }
+                                });
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressBar.setVisibility(View.INVISIBLE);
+                                Toast.makeText(demo.this, "Error ", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(getApplicationContext(), Login.class));
+                            }
+                        });
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+
+                    }
+                });
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(demo.this, "Error while attempt to upload the picture to the server", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
 
     }
+
+
+
 }
+
 
 
