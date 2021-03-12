@@ -9,33 +9,47 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.SearchView;
 
+import com.example.face.class_for_code.MyCustomAdapter;
+import com.example.face.class_for_code.Object_Information;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity2 extends AppCompatActivity {
 
-     StorageReference mStorageRef;
 
-    Button bt_12;
+    ListView ls;
+    ArrayList<Object_Information> Objects;
+    FirebaseFirestore db;
+    FirebaseAuth fAut;
+    MyCustomAdapter adapter;
+    StorageReference mStorageRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        ls = findViewById(R.id.ls);
+        fAut = FirebaseAuth.getInstance();
+        Objects = new ArrayList<Object_Information>();
+
+
+        db = FirebaseFirestore.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        ImageView image_1= findViewById(R.id.image_1);
 
 
-        bt_12 = findViewById(R.id.bt_12);
-        String imageUri = "https://i.imgur.com/tGbaZCY.jpg";
-        ImageView ivBasicImage = (ImageView) findViewById(R.id.image_1);
-        Picasso.get().load(imageUri).into(image_1);
 
 
 

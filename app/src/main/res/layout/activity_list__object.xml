@@ -8,12 +8,13 @@
     android:orientation="vertical">
 
 
-    <EditText
+    <SearchView
         android:id="@+id/ed_search"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:imeOptions="actionSearch"
         android:inputType="text"
+        android:queryHint="student name"
         />
 
 
