@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,50 +7,47 @@
     app:cardElevation="3dp"
     app:cardCornerRadius="3dp"
     app:cardUseCompatPadding="true"
-    >
+    android:background="@color/backgroundAppColor">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="horizontal"
-        >
+        android:background="@drawable/elements_style">
 
         <ImageView
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:src="@mipmap/ic_launcher"
-            android:id="@+id/image"
-            />
+            android:id="@+id/image"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView1"
                 android:text="Main Title"
                 android:textStyle="bold"
                 android:layout_margin="5dp"
                 android:textSize="20sp"
-                />
+                android:textColor="@color/black"/>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2"
                 android:text="Sub Title"
                 android:layout_margin="5dp"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

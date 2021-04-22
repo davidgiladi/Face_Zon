@@ -2,6 +2,7 @@ package com.example.face;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseStorage mStorageRef;
     TextView textView;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         bt_demo = findViewById(R.id.bt_demo);
         bt_logout = findViewById(R.id.bt_logout);
         fAut = FirebaseAuth.getInstance();
-        textView.setText(fAut.getCurrentUser().getUid());
+        textView.setText( "Current user : " + fAut.getCurrentUser().getUid());
 
         bt_logout.setOnClickListener(new View.OnClickListener() {
             @Override

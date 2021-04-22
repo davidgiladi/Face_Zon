@@ -70,9 +70,6 @@ public class Add_Object extends AppCompatActivity {
         bt_save = findViewById(R.id.bt_save);
         bt_camere = findViewById(R.id.bt_camera);
         image_view_1 = findViewById(R.id.image_view_1);
-        image_view_2 = findViewById(R.id.image_view_2);
-        image_view_3 = findViewById(R.id.image_view_3);
-
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String user_ID = user.getUid();

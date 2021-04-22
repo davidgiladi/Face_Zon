@@ -100,4 +100,7 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {}// this is canceling the option to go back because if i go back it can get me to MainActivity.class
 }
