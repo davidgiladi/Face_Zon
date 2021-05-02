@@ -55,7 +55,7 @@
         android:textSize="20sp"
         android:textColor="@color/colorPrimaryDark"
         android:text="login"
-        android:drawableTop="@drawable/ic_login_24"/>
+        android:drawableLeft="@drawable/ic_login_24"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

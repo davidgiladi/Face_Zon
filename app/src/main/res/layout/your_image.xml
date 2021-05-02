@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/image_border">
 
-
         <ImageView
             android:id="@+id/your_image"
             android:layout_width="80dp"

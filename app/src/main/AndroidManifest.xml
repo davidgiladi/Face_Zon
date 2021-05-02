@@ -20,9 +20,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity2"/>
         <activity android:name=".List_Object" />
-        <activity android:name=".demo" />
-        <activity android:name=".Add_Object" />
-        <activity android:name=".Pupil" />
+        <activity android:name=".addObject" />
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

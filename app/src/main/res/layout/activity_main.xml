@@ -1,73 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/backgroundAppColor"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:background="@color/backgroundAppColor">
 
-   <LinearLayout
+   <ListView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_gravity="top">
+
+<!--      כאן אתה דואג להכניס את המצלמות    -->
+
+   </ListView>
+
+
+   <com.google.android.material.bottomappbar.BottomAppBar
+       android:id="@+id/bottom_app_bar"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_gravity="bottom"
+       app:backgroundTint="@color/black"
+       app:hideOnScroll="true"
+       app:fabAlignmentMode="end"
+       app:maxImageSize="50dp"
+       app:menu="@menu/app_bar_menu"/>
+
+   <com.google.android.material.floatingactionbutton.FloatingActionButton
+       android:id="@+id/add"
        android:layout_width="wrap_content"
-       android:layout_height="0dp"
-       android:layout_weight="8"
-       android:orientation="vertical"
-       android:gravity="center">
+       android:layout_height="wrap_content"
+       android:src="@drawable/ic_round_person_add_alt_1_24"
+       app:backgroundTint="@color/colorPrimaryDark"
+       app:layout_anchor="@id/bottom_app_bar"
+       app:maxImageSize="30dp"/>
 
-       <Button
-           android:id="@+id/bt_list"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-
-           android:text=" List"
-           android:layout_margin="5dp"
-           android:padding="10dp"
-           android:textColor="@color/colorPrimaryDark"
-           android:background="@drawable/elements_style"
-           android:drawableStart="@drawable/ic_baseline_list_24"
-           android:textSize="20sp"/>
-
-       <!--    <ImageButton-->
-       <!--        android:id="@+id/imageButton"-->
-       <!--        android:layout_width="wrap_content"-->
-       <!--        android:layout_height="wrap_content"-->
-       <!--        android:layout_marginBottom="8dp"-->
-       <!--        android:onClick="add_object"-->
-       <!--        app:srcCompat="@android:drawable/ic_input_add" />-->
-
-       <Button
-           android:id="@+id/bt_demo"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text=" Add"
-           android:layout_margin="5dp"
-           android:padding="10dp"
-           android:textSize="20sp"
-           android:textColor="@color/colorPrimaryDark"
-           android:background="@drawable/elements_style"
-           android:drawableStart="@drawable/ic_round_person_add_alt_1_24"/>
-
-       <Button
-           android:id="@+id/bt_logout"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_margin="5dp"
-           android:padding="10dp"
-           android:text=" Log out"
-           android:textSize="20sp"
-           android:textColor="@color/colorPrimaryDark"
-           android:background="@drawable/elements_style"
-           android:drawableStart="@drawable/ic_login_24"/>
-
-   </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"/>
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

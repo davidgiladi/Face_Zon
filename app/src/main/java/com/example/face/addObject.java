@@ -2,16 +2,12 @@ package com.example.face;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -24,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.face.class_for_code.Your_Image_Adapter;
 import com.example.face.dialog.Dialog_Error;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,14 +38,13 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nullable;
 
 import static com.example.face.R.*;
 
-public class demo extends AppCompatActivity {
+public class addObject extends AppCompatActivity {
 
     EditText user_name;
     EditText user_email;
@@ -71,12 +65,10 @@ public class demo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout.activity_demo);
+        setContentView(layout.activity_add__object);
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-
 
         user_name = findViewById(id.username);
         user_email = findViewById(id.user_email);
@@ -87,7 +79,6 @@ public class demo extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference();
         FirebaseUser user = fAut.getCurrentUser();
         manger_id = user.getUid();
-
 
         image_view_1 = findViewById(id.image_view_1);
 
@@ -192,7 +183,7 @@ public class demo extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(demo.this, "Error ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(addObject.this, "Error ", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(getApplicationContext(), Login.class));
 
                     }
@@ -322,12 +313,12 @@ public class demo extends AppCompatActivity {
                                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                                 if (task.isSuccessful()) {
                                                                     progressBar.setVisibility(View.INVISIBLE);
-                                                                    Toast.makeText(demo.this, "The user added successfully  ", Toast.LENGTH_LONG).show();
+                                                                    Toast.makeText(addObject.this, "The user added successfully  ", Toast.LENGTH_LONG).show();
                                                                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
                                                                 } else {
                                                                     progressBar.setVisibility(View.INVISIBLE);
-                                                                    Toast.makeText(demo.this, "Error ", Toast.LENGTH_LONG).show();
+                                                                    Toast.makeText(addObject.this, "Error ", Toast.LENGTH_LONG).show();
                                                                     startActivity(new Intent(getApplicationContext(), Login.class));
                                                                 }
 
@@ -339,7 +330,7 @@ public class demo extends AppCompatActivity {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
                                                         progressBar.setVisibility(View.INVISIBLE);
-                                                        Toast.makeText(demo.this, "Error ", Toast.LENGTH_LONG).show();
+                                                        Toast.makeText(addObject.this, "Error ", Toast.LENGTH_LONG).show();
                                                         startActivity(new Intent(getApplicationContext(), Login.class));
                                                     }
                                                 });

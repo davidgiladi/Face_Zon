@@ -79,10 +79,9 @@ public class Login extends AppCompatActivity {
 
                                         } else {
                                             progressBar.setVisibility(View.INVISIBLE);
-                                            startActivity(new Intent(getApplicationContext(), Pupil.class));
+                                            startActivity(new Intent(getApplicationContext(), MainActivity.class)); // it was pupil but we deleted this activity
                                             Toast.makeText(Login.this,"Logged In Successfully",Toast.LENGTH_LONG).show();
                                         }
-                                    } else {
                                     }
                                 }
                             });

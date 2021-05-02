@@ -5,18 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 
 public class MainActivity extends AppCompatActivity {
-    Button bt_logout ,bt_demo, bt_list;
+
     FirebaseAuth fAut;
     FirebaseStorage mStorageRef;
-    TextView textView;
+    FloatingActionButton addObjectButton;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -24,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mStorageRef = FirebaseStorage.getInstance();
-        textView = findViewById(R.id.textView);
+
+        addObjectButton = findViewById(R.id.add);
+
+//        textView = findViewById(R.id.textView);
         //StorageReference ref = mStorageRef.getReferenceFromUrl("gs://facezen-18934.appspot.com/").child("manger/"+fAut.getCurrentUser().getUid()+"/"+"user one.jpg");
        /* File file = null;
         try {
@@ -40,38 +45,39 @@ public class MainActivity extends AppCompatActivity {
                 image_1.setImageBitmap(bitmap);
             }
         });*/
-        bt_list = findViewById(R.id.bt_list);
-        bt_demo = findViewById(R.id.bt_demo);
-        bt_logout = findViewById(R.id.bt_logout);
-        fAut = FirebaseAuth.getInstance();
-        textView.setText( "Current user : " + fAut.getCurrentUser().getUid());
 
-        bt_logout.setOnClickListener(new View.OnClickListener() {
+        fAut = FirebaseAuth.getInstance();
+//        textView.setText( "Current user : " + fAut.getCurrentUser().getUid());
+
+
+        addObjectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), addObject.class));
+            }
+        });
+    }
+
+    //this function is for the items in the navigation bar
+    @SuppressLint("NonConstantResourceId")
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case R.id.bt_log_out:
                 fAut.signOut();
                 startActivity(new Intent(getApplicationContext(), Login.class));
+                break;
 
-            }
-        });
-        bt_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.bt_list:
                 startActivity(new Intent(getApplicationContext(), List_Object.class));
+                break;
 
-            }
-        });
-
-        bt_demo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), demo.class));
-
-            }
-        });
+            case R.id.customize:
+                //todo here you make the custom request
+                break;
+        }
+        return false;
     }
-    public void add_object (View v){
-        startActivity(new Intent(getApplicationContext(), MainActivity2.class));
 
-    }
 }
