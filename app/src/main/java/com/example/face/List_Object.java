@@ -3,28 +3,17 @@ package com.example.face;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.face.class_for_code.MyCustomAdapter;
 import com.example.face.class_for_code.Object_Information;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -37,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class List_Object extends AppCompatActivity {
+
     ListView listView;
     SearchView etSearch ;;
     FirebaseFirestore db;
@@ -46,8 +36,6 @@ public class List_Object extends AppCompatActivity {
 
     ArrayList <Object_Information> Objects;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +44,6 @@ public class List_Object extends AppCompatActivity {
         etSearch = findViewById(R.id.ed_search);
         fAut = FirebaseAuth.getInstance();
         Objects = new ArrayList<Object_Information>();
-
 
         db = FirebaseFirestore.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -73,10 +60,8 @@ public class List_Object extends AppCompatActivity {
                         Object_Information o1 = (Object_Information) parent.getItemAtPosition(position);
                         Toast.makeText(List_Object.this, o1.get_uid(), Toast.LENGTH_LONG).show();
 
-
                     }
                 });
-
             }
         });
 
@@ -105,7 +90,6 @@ public class List_Object extends AppCompatActivity {
                 return false;
             }
         });
-
 
     /*    etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -139,24 +123,6 @@ public class List_Object extends AppCompatActivity {
             }
         });*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     private void read_data (final Firestore_on_call firestore_on_call) {
@@ -183,16 +149,12 @@ public class List_Object extends AppCompatActivity {
                                 }
                                 firestore_on_call.on_call(Objects);
 
-
                             } else {
                                 Log.d("Tag", "Error getting documents: ", task.getException());
                             }
                         }
                     });
-
         }
-
-
 
 /*
     private void read_data_after_search (String name ,final Firestore_on_call firestore_on_call){
@@ -229,9 +191,4 @@ public class List_Object extends AppCompatActivity {
     private interface  Firestore_on_call {
         void on_call(List <Object_Information> list);
     }
-
-
-
-
-
 }

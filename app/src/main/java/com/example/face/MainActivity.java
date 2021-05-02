@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -75,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.customize:
                 //todo here you make the custom request
+                startActivity(new Intent(getApplicationContext(), CustomizeActivity.class));
                 break;
         }
         return false;

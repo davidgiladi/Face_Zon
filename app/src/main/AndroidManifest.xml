@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity2"/>
+        <activity android:name=".CustomizeActivity"/>
         <activity android:name=".List_Object" />
         <activity android:name=".addObject" />
         <activity android:name=".Login">
