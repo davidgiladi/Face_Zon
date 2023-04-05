@@ -1,14 +1,15 @@
 package com.example.face;
 
+import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
 
-public class Pupil extends AppCompatActivity {
+public class CustomizeActivity extends AppCompatActivity {
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pupil);
+        setContentView(R.layout.customize_activity);
+
     }
+
 }

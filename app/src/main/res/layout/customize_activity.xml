@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    tools:context=".CustomizeActivity"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+   <com.google.android.material.textview.MaterialAutoCompleteTextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="In renovations"
+       android:textStyle="bold"
+       android:padding="10dp"
+       android:gravity="center"
+       android:rotation="-30"
+       android:background="@drawable/element_in_renovations"/>
+
+</LinearLayout>

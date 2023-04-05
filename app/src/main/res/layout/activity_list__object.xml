@@ -5,8 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context=".List_Object"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:background="@color/backgroundAppColor">
 
     <SearchView
         android:id="@+id/ed_search"
@@ -15,17 +15,14 @@
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:queryHint="student name"
-        />
-
-
-
+        android:layout_margin="3dp"
+        android:background="@drawable/elements_style"/>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        >
+        android:layout_margin="1dp">
 
 
     </ListView>
